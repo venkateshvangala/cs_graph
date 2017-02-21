@@ -19,10 +19,14 @@ export class HomeComponent implements OnInit {
 
   public createCircles(count){
     this.circles = [];
-    for (let i = 0; i < count; i++) {
-      let x = 50 + Math.random() * 300;
-      let y = 25 + Math.random() * 300;
-      let r = 20  + Math.random() * 6;    
+    for (var i = 0; i < count; i++) {
+      var x = 50 + i * 100;
+      var y = 25 + i * 4;
+      var r = 20  + Math.random() * 6;    
+      if(x > 1180){
+        x = ((count - i) % 10) * 100;
+        y = (25 + i * 4) + 400
+      }
       this.circles.push({x, y, r});
     }
   }
