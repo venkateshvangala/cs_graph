@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
         x = ((count - i) % 10) * 100;
         y = (25 + i * 4) + 400
       }
+      console.log(x + '---' + y + '----' + r)
       this.circles.push({x, y, r});
     }
   }
@@ -38,10 +39,12 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < count; i++) {
       context.beginPath();
       context.arc(this.circles[i].x, this.circles[i].y, this.circles[i].r, 0, 6.282);
-      context.fillStyle = '#4A8';
+      var color = (i.toString().length > 1) ? '#4' : '#4A'
+      console.log(color.toString() + i)
+      context.fillStyle = color + i;
       context.fill();
        let radius = 70;
-       context.fillStyle = '#000';
+       context.fillStyle = '#fff';
       let font = "bold " + 12 +"px serif";
       context.font = font;
       context.textBaseline = "top";
@@ -68,7 +71,7 @@ export class HomeComponent implements OnInit {
       let radius = 70;
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      context.fillStyle = 'green';
+      context.fillStyle = 'yellow';
       context.fill();
       context.lineWidth = 2;
       context.strokeStyle = '#003300';
