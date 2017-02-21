@@ -93,13 +93,11 @@ export class HomeComponent implements OnInit {
   }
 
    public handleTextNode(event) {
-    if(this.graph.stringText && this.graph.stringText.length){
       var canvas = document.getElementById('myCanvas');
       var context = canvas.getContext('2d');
       this.createCircles(this.graph.stringText.length);
       this.createCanvasElement();
       this.createRootNode();
       this.drawCircles();
-    }
   }
 }
