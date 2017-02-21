@@ -42,8 +42,19 @@ export class HomeComponent implements OnInit {
       context.font = font;
       context.textBaseline = "top";
       context.fillText(this.graph.stringText[i], (this.circles[i].x - radius/4) + 15, (this.circles[i].y - radius/2) + 30);
+      this.drawLine((canvas.width / 2 - 70/4) - 30 , (canvas.height / 2 - 70/2) + 30, (this.circles[i].x - 70/4) + 15, (this.circles[i].y - 70/2) + 30);
     }
   }
+
+  public drawLine(center1_x, center1_y, center2_x, center2_y) {
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      context.beginPath();
+      context.moveTo(center1_x, center1_y);
+      context.lineTo(center2_x, center2_y);
+      context.stroke();
+  }
+        
 
   public createRootNode(){
       let canvas = document.getElementById('myCanvas');
@@ -63,7 +74,7 @@ export class HomeComponent implements OnInit {
       context.font = font;
       context.textBaseline = "top";
       context.fillText(this.graph.name, (centerX-radius/4) - 30 , (centerY-radius/2) + 30);
-}
+  }
 
   public createCanvasElement(){
     if(document.getElementById('myCanvas')){
@@ -83,6 +94,8 @@ export class HomeComponent implements OnInit {
 
    public handleTextNode(event) {
     if(this.graph.stringText && this.graph.stringText.length){
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
       this.createCircles(this.graph.stringText.length);
       this.createCanvasElement();
       this.createRootNode();
