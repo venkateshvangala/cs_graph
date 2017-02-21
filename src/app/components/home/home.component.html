@@ -1,1 +1,9 @@
-Home Page With Static Data
+<div class="container">
+    <input type="text"  [ngModelOptions]="{standalone: true}" (input)="handleNameNode( $event)" [(ngModel)]="graph.name" class="pull-left input_text"/>
+    <input style="margin-left: 6.5%" type="text"  [ngModelOptions]="{standalone: true}" (input)="handleTextNode( $event)" [(ngModel)]="graph.stringText" class="pull-left input_text"/>
+</div>
+
+
+<div class="main-container">
+    <canvas id="myCanvas" width="1200" height="600"></canvas>
+</div>
