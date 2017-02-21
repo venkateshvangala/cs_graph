@@ -13,15 +13,15 @@ export class HomeComponent implements OnInit {
   constructor( public appState: AppState) {}
 
   public ngOnInit() {
-    console.log('Successfully rendered home page');
+    this.createCanvasElement();
     this.createRootNode()
   }
 
   public createCircles(count){
     this.circles = [];
     for (let i = 0; i < count; i++) {
-      let x = 5+ Math.random() * 300;
-      let y = 5+ Math.random() * 300;
+      let x = 50 + Math.random() * 300;
+      let y = 25 + Math.random() * 300;
       let r = 20  + Math.random() * 6;    
       this.circles.push({x, y, r});
     }
@@ -29,10 +29,11 @@ export class HomeComponent implements OnInit {
 
   public drawCircles(){
     let count = this.circles.length;
+    console.log("draw..." + count);
     let canvas = document.getElementById('myCanvas');
     let ctx = canvas.getContext('2d');
     ctx.fillStyle = '#4A8';
-    for (let i=0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
       ctx.beginPath();
       ctx.arc(this.circles[i].x, this.circles[i].y, this.circles[i].r, 0, 6.282);
       ctx.fill();
@@ -40,12 +41,11 @@ export class HomeComponent implements OnInit {
   }
 
   public createRootNode(){
-    var canvas = document.getElementById('myCanvas');
-      var context = canvas.getContext('2d');
-      var centerX = canvas.width / 2;
-      var centerY = canvas.height / 2;
-      var radius = 70;
-
+      let canvas = document.getElementById('myCanvas');
+      let context = canvas.getContext('2d');
+      let centerX = canvas.width / 2;
+      let centerY = canvas.height / 2;
+      let radius = 70;
       context.beginPath();
       context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
       context.fillStyle = 'green';
@@ -58,16 +58,30 @@ export class HomeComponent implements OnInit {
       context.font = font;
       context.textBaseline = "top";
       context.fillText(this.graph.name, (centerX-radius/4) - 30 , (centerY-radius/2) + 30);
-
 }
 
-  public handleNameNode(event) {
+  public createCanvasElement(){
+    if(document.getElementById('myCanvas')){
+      document.getElementById('myCanvas').remove();
+    }
+    let container = document.getElementById('canvas-container')
+    let canvas = document.createElement('canvas');
+    canvas.id = "myCanvas";
+    canvas.width = 1200;
+    canvas.height = 600;
+    container.appendChild(canvas)
+  }
+
+  public handleNameNode() {
     this.createRootNode()
   }
 
    public handleTextNode(event) {
-    console.log(this.graph.stringText);
-    this.createCircles(4);
-    this.drawCircles();
+    if(this.graph.stringText && this.graph.stringText.length){
+      this.createCircles(this.graph.stringText.length);
+      this.createCanvasElement();
+      this.createRootNode();
+      this.drawCircles();
+    }
   }
 }
