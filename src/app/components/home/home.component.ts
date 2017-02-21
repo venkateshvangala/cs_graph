@@ -29,14 +29,19 @@ export class HomeComponent implements OnInit {
 
   public drawCircles(){
     let count = this.circles.length;
-    console.log("draw..." + count);
     let canvas = document.getElementById('myCanvas');
-    let ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#4A8';
+    let context = canvas.getContext('2d');
     for (let i = 0; i < count; i++) {
-      ctx.beginPath();
-      ctx.arc(this.circles[i].x, this.circles[i].y, this.circles[i].r, 0, 6.282);
-      ctx.fill();
+      context.beginPath();
+      context.arc(this.circles[i].x, this.circles[i].y, this.circles[i].r, 0, 6.282);
+      context.fillStyle = '#4A8';
+      context.fill();
+       let radius = 70;
+       context.fillStyle = '#000';
+      let font = "bold " + 12 +"px serif";
+      context.font = font;
+      context.textBaseline = "top";
+      context.fillText(this.graph.stringText[i], (this.circles[i].x - radius/4) + 15, (this.circles[i].y - radius/2) + 30);
     }
   }
 
